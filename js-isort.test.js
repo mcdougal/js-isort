@@ -645,6 +645,44 @@ import { aaa, bbb, ccc, ddd, eee, fff, ggg, hhh, iii, jjj, kkk } from "h";
   expect(isort(content)).toEqual(result);
 });
 
+it(`works on aliases of different import styles`, () => {
+  const aliases = [`actions`, `components`, `styles`];
+
+  const content = `
+import Button from 'components/Button';
+import actions from 'actions';
+import 'styles';
+  `.trim();
+
+  const result = `
+import 'styles';
+
+import actions from 'actions';
+import Button from 'components/Button';
+  `.trim();
+
+  expect(isort(content, aliases)).toEqual(result);
+});
+
+it(`does not match alias if other module starts with same name`, () => {
+  const aliases = [`components`, `styles`];
+
+  const content = `
+import Button from 'components/Button';
+import styles from 'styles';
+import stylesParser from 'styles-parser';
+  `.trim();
+
+  const result = `
+import stylesParser from 'styles-parser';
+
+import Button from 'components/Button';
+import styles from 'styles';
+  `.trim();
+
+  expect(isort(content, aliases)).toEqual(result);
+});
+
 it(`does not add a newline after last group if it doesn't need to`, () => {
   const content = `
 import React from 'react';

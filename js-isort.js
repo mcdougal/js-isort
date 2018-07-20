@@ -81,7 +81,7 @@ const getModuleType = (node, aliases) => {
   }
 
   const isAlias = aliases.some((alias) => {
-    return module.startsWith(`${alias}/`);
+    return module === alias || module.startsWith(`${alias}/`);
   });
 
   if (isAlias) {

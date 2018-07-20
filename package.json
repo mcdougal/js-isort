@@ -2,7 +2,18 @@
   "name": "js-isort",
   "version": "1.0.0",
   "description": "Group and sort JS imports.",
-  "license": "ISC",
+  "keywords": [
+    "js",
+    "es2015",
+    "import",
+    "sort"
+  ],
+  "license": "MIT",
+  "author": "Cedric McDougal",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcdougal/js-isort.git"
+  },
   "main": "js-isort.js",
   "bin": "./js-isort-cli.js",
   "scripts": {

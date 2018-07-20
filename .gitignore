@@ -1,0 +1,21 @@
+# Dependencies
+node_modules
+
+# Testing
+coverage
+
+# Production
+build
+
+# Temporary editor files
+.DS_Store
+*~
+
+# Logs
+npm-debug.log*
+
+# Misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

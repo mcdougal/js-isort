@@ -14,8 +14,8 @@
     "type": "git",
     "url": "https://github.com/mcdougal/js-isort.git"
   },
-  "main": "js-isort.js",
-  "bin": "./js-isort-cli.js",
+  "main": "src/js-isort.js",
+  "bin": "src/js-isort-cli.js",
   "scripts": {
     "lint": "eslint *.js",
     "test": "jest",

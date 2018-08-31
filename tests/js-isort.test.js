@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const isort = require(`./js-isort`);
+const isort = require(`../src/js-isort`);
 
 // =============================================================================
 //  Empty States

@@ -10,6 +10,7 @@ build
 # Temporary editor files
 .DS_Store
 *~
+*.temp
 
 # Logs
 npm-debug.log*

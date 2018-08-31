@@ -13,13 +13,13 @@ The following transformations take place:
 # Usage
 
 ```
-  Usage: js-isort-cli [options] <file ...>
+Usage: js-isort [options] <file ...>
 
-  Options:
+Options:
 
-    -v, --version             output the version number
-    --webpack-config [value]  Path to webpack config with aliases
-    -h, --help                output usage information
+  -v, --version          output the version number
+  --config-path [value]  Path to Babel or Webpack config file containing aliases
+  -h, --help             output usage information
 ```
 
 # Grouping
@@ -37,7 +37,7 @@ import http from 'http';
 import classNames from 'classnames';
 import React from 'react';
 
-// 4. Aliases (from Webpack)
+// 4. Aliases (from Webpack or Babel)
 import App from 'components/App';
 import format from 'utils/format';
 
@@ -85,13 +85,13 @@ import foo1, { bar, foo4, foo30, foo200, foo1000 } from 'foo';
 
 # Aliases
 
-In order for aliases to be recognized, you must pass in the path to your Webpack config file:
+In order for aliases to be recognized, you must pass in the path to your Webpack or Babel config file:
 
 ```
-js-isort-cli --webpack-config webpack.config.js myFile.js
+js-isort-cli --config-path webpack.config.js myFile.js
 ```
 
-Note: it can be expensive to import the Webpack config, so `js-isort` will cache the aliases in a temporary file. The cache is invalidated when the webpack config file is updated.
+Note: it can be expensive to import the config, so `js-isort` will cache the aliases in a temporary file. The cache is invalidated when the config file is updated.
 
 # Comments
 

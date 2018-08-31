@@ -7,7 +7,7 @@ const isort = require(`./js-isort`);
 const resolveAliases = require(`./resolveAliases`);
 
 program
-  .version(`2.0.0`, `-v, --version`)
+  .version(`2.0.2`, `-v, --version`)
   .usage(`[options] <file ...>`)
   .option(
     `--config-path [value]`,

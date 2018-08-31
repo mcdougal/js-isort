@@ -10,6 +10,18 @@ The following transformations take place:
 4. Sorts import specifiers alphabetically (uses [natural sort order](https://en.wikipedia.org/wiki/Natural_sort_order))
 5. Separates groups with an empty line
 
+# Usage
+
+```
+  Usage: js-isort-cli [options] <file ...>
+
+  Options:
+
+    -v, --version             output the version number
+    --webpack-config [value]  Path to webpack config with aliases
+    -h, --help                output usage information
+```
+
 # Grouping
 
 ```
@@ -92,18 +104,6 @@ Comments at the top of the file will stay in place. All other comments will move
 # Configuration
 
 `js-isort` is not currently configurable. Maybe one day.
-
-# Usage
-
-```
-  Usage: js-isort-cli [options] <file ...>
-
-  Options:
-
-    -v, --version             output the version number
-    --webpack-config [value]  Path to webpack config with aliases
-    -h, --help                output usage information
-```
 
 # License
 

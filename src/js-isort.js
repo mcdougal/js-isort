@@ -410,6 +410,7 @@ const parseContent = (content) => {
   const ast = babelParser.parse(content, {
     plugins: [
       `classProperties`,
+      `dynamicImport`,
       `exportDefaultFrom`,
       `exportNamespaceFrom`,
       `objectRestSpread`,

@@ -1,3 +1,4 @@
+const crypto = require(`crypto`);
 const fs = require(`fs`);
 const os = require(`os`);
 const path = require(`path`);
@@ -5,19 +6,24 @@ const path = require(`path`);
 // Cache parsed aliases because it can take 1 second or more to load the config
 // file. This is too long if you are sorting imports on every save or if you are
 // running a git precommit hook.
-const ALIASES_CACHE_FILE = path.join(
-  os.tmpdir(),
-  `js-isort-aliases-cache.json`
-);
+const getAliasesCacheFilePath = () => {
+  // Make sure the cache doesn't collide across multiple projects
+  const dirnameHash = crypto
+    .createHash(`md5`)
+    .update(__dirname)
+    .digest(`hex`);
+
+  return path.join(os.tmpdir(), `js-isort-aliases-cache-${dirnameHash}.json`);
+};
 
 const loadCache = () => {
   let cache = {};
 
-  if (fs.existsSync(ALIASES_CACHE_FILE)) {
+  if (fs.existsSync(getAliasesCacheFilePath())) {
     let cacheJson;
 
     try {
-      cacheJson = fs.readFileSync(ALIASES_CACHE_FILE);
+      cacheJson = fs.readFileSync(getAliasesCacheFilePath());
     } catch (error) {
       cacheJson = null;
     }
@@ -43,7 +49,7 @@ const setCachedAliases = (cache, configAbsPath, aliases) => {
     aliases,
   };
 
-  fs.writeFileSync(ALIASES_CACHE_FILE, JSON.stringify(newCache));
+  fs.writeFileSync(getAliasesCacheFilePath(), JSON.stringify(newCache));
 };
 
 const getCachedAliases = (cache, configAbsPath) => {

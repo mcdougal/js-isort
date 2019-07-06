@@ -122,7 +122,11 @@ import { test3 } from "xar";
 import { test4 as alias } from "qar";
 import { test5, test6 } from "par";
 import { test7, test8 as alias2 } from "dar";
-import test9, { test10, test11, test12 } from "car";
+import test9, {
+  test10,
+  test11,
+  test12
+} from "car";
 import test13, * as test15 from "bar";
 import "aar";
 
@@ -130,15 +134,26 @@ console.log('foo');
   `.trim();
 
   const result = `
-import "aar";
-import test13, * as test15 from "bar";
-import test9, { test10, test11, test12 } from "car";
-import { test7, test8 as alias2 } from "dar";
-import { test5, test6 } from "par";
-import { test4 as alias } from "qar";
-import { test3 } from "xar";
-import * as test2 from "yar";
-import test1 from "zar";
+import 'aar';
+
+import test13, * as test15 from 'bar';
+import test9, {
+  test10,
+  test11,
+  test12
+} from 'car';
+import {
+  test7,
+  test8 as alias2
+} from 'dar';
+import {
+  test5,
+  test6
+} from 'par';
+import { test4 as alias } from 'qar';
+import { test3 } from 'xar';
+import * as test2 from 'yar';
+import test1 from 'zar';
 
 console.log('foo');
   `.trim();
@@ -154,7 +169,11 @@ import { test3 } from 'xar';
 import { test4 as alias } from 'qar';
 import { test5, test6 } from 'par';
 import { test7, test8 as alias2 } from 'dar';
-import test9, { test10, test11, test12 } from 'car';
+import test9, {
+  test10,
+  test11,
+  test12
+} from 'car';
 import test13, * as test15 from 'bar';
 import 'aar';
 
@@ -165,9 +184,19 @@ console.log('foo');
 import 'aar';
 
 import test13, * as test15 from 'bar';
-import test9, { test10, test11, test12 } from 'car';
-import { test7, test8 as alias2 } from 'dar';
-import { test5, test6 } from 'par';
+import test9, {
+  test10,
+  test11,
+  test12
+} from 'car';
+import {
+  test7,
+  test8 as alias2
+} from 'dar';
+import {
+  test5,
+  test6
+} from 'par';
 import { test4 as alias } from 'qar';
 import { test3 } from 'xar';
 import * as test2 from 'yar';
@@ -200,8 +229,18 @@ console.log('foo');
 
   const result = `
 import { export7 } from 'bar';
-import { export1, export2, export3 } from 'baz';
-import { export1, export2, export3, export4, export5 } from 'foo';
+import {
+  export1,
+  export2,
+  export3
+} from 'baz';
+import {
+  export1,
+  export2,
+  export3,
+  export4,
+  export5
+} from 'foo';
 
 console.log('foo');
   `.trim();
@@ -215,7 +254,19 @@ import { foo1, foo2, foo3, foo4, foo5, foo6, foo7, foo8, foo9, foo10, foo11 } fr
   `.trim();
 
   const result = `
-import { foo1, foo2, foo3, foo4, foo5, foo6, foo7, foo8, foo9, foo10, foo11 } from "foo";
+import {
+  foo1,
+  foo2,
+  foo3,
+  foo4,
+  foo5,
+  foo6,
+  foo7,
+  foo8,
+  foo9,
+  foo10,
+  foo11
+} from 'foo';
   `.trim();
 
   expect(isort(content)).toEqual(result);
@@ -227,7 +278,12 @@ import { foo1000, foo200, foo30, foo4 } from "foo";
   `.trim();
 
   const result = `
-import { foo4, foo30, foo200, foo1000 } from "foo";
+import {
+  foo4,
+  foo30,
+  foo200,
+  foo1000
+} from "foo";
   `.trim();
 
   expect(isort(content)).toEqual(result);

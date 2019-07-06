@@ -3,8 +3,8 @@
  *
  * Imports are grouped based on the module type and sorted based on the name.
  */
-const babelParser = require(`@babel/parser`);
-const generate = require(`@babel/generator`);
+const acorn = require(`acorn-loose`);
+const escodegen = require(`escodegen`);
 const os = require(`os`);
 
 const NODE_BUILTINS = [
@@ -120,9 +120,19 @@ const getBreakpoints = (importNodes, aliases) => {
  * Turn the transformed AST back into a JavaScript source code string.
  */
 const generateCode = (content, ast, aliases, topCommentsEnd, bodyStart) => {
-  const breakpoints = getBreakpoints(ast.program.body, aliases);
+  const breakpoints = getBreakpoints(ast.body, aliases);
 
-  let importsCode = generate.default(ast).code;
+  let importsCode = escodegen.generate(ast, {
+    comment: true,
+    format: {
+      indent: {
+        style: `  `,
+      },
+      newline: os.EOL,
+    },
+  });
+
+  console.log(importsCode);
 
   // Make sure there are no blank lines
   importsCode = importsCode
@@ -407,33 +417,27 @@ const getTopImports = (nodes) => {
  * Parse the given JS source code string into an AST.
  */
 const parseContent = (content) => {
-  const ast = babelParser.parse(content, {
-    allowAwaitOutsideFunction: true,
-    allowImportExportEverywhere: true,
-    allowReturnOutsideFunction: true,
-    plugins: [
-      `classProperties`,
-      `dynamicImport`,
-      `exportDefaultFrom`,
-      `exportNamespaceFrom`,
-      `objectRestSpread`,
-      `jsx`,
-    ],
+  //console.log(content);
+
+  const ast = acorn.parse(content, {
+    allowHashBang: true,
+    locations: true,
     ranges: true,
     sourceType: `module`,
-    strictMode: false,
   });
+
+  //console.log(JSON.stringify(ast));
 
   // Do not move comments at the top of the file
   let topCommentsEnd = 0;
 
-  if (ast.program.body.length > 0) {
-    const topComments = ast.program.body[0].leadingComments || [];
+  if (ast.body.length > 0) {
+    const topComments = ast.body[0].leadingComments || [];
 
     if (topComments.length > 0) {
       topCommentsEnd = topComments[topComments.length - 1].end;
 
-      ast.program.body[0].leadingComments = [];
+      ast.body[0].leadingComments = [];
     }
   }
 
@@ -451,7 +455,9 @@ const isort = (content, aliases = []) => {
   });
 
   const { ast, topCommentsEnd } = parseContent(content);
-  let importNodes = getTopImports(ast.program.body);
+  let importNodes = getTopImports(ast.body);
+
+  console.log(ast);
 
   cleanUpComments(importNodes);
 
@@ -474,7 +480,7 @@ const isort = (content, aliases = []) => {
       }
     });
 
-    ast.program.body = importNodes;
+    ast.body = importNodes;
 
     newContent = generateCode(content, ast, aliases, topCommentsEnd, bodyStart);
   }

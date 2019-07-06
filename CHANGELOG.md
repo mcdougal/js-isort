@@ -1,3 +1,9 @@
+2.0.5 / 2019-07-06
+==================
+
+* Fixed bug where import alias cache would apply to other projects using js-isort
+* Updated all dependencies to latest versions
+
 2.0.4 / 2018-09-22
 ==================
 

@@ -408,6 +408,9 @@ const getTopImports = (nodes) => {
  */
 const parseContent = (content) => {
   const ast = babelParser.parse(content, {
+    allowAwaitOutsideFunction: true,
+    allowImportExportEverywhere: true,
+    allowReturnOutsideFunction: true,
     plugins: [
       `classProperties`,
       `dynamicImport`,
@@ -418,6 +421,7 @@ const parseContent = (content) => {
     ],
     ranges: true,
     sourceType: `module`,
+    strictMode: false,
   });
 
   // Do not move comments at the top of the file

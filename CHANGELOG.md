@@ -1,4 +1,11 @@
-# 2.0.5 / 2020-01-12
+# 3.0.0 / 2020-01-12
+
+BREAKING CHANGES:
+
+1. The CLI tool now prints the file modifications to stdout by default instead of writing directly to the file. To write to the file, the `--write` flag is now required.
+2. The `--config-path` flag was renamed to `--config`
+
+# 2.1.0 / 2020-01-12
 
 - Fixed bug where import alias cache would apply to other projects using js-isort
 - Updated all dependencies to latest versions

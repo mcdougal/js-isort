@@ -10,13 +10,15 @@ program
   .version(`2.0.2`, `-v, --version`)
   .usage(`[options] <file ...>`)
   .option(
-    `--config-path [value]`,
-    `Path to Babel or Webpack config file containing aliases`
+    `--config [value]`,
+    `Path to Babel or webpack configuration file containing aliases`
   )
+  .option(`--write`, `Edit files in-place`)
   .parse(process.argv);
 
 const filePaths = program.args;
-const configPath = program.configPath;
+const configPath = program.config;
+const writeToFile = program.write;
 
 if (filePaths.length === 0) {
   program.help();
@@ -32,7 +34,10 @@ filePaths.forEach((filePath) => {
 
     const sortedContent = isort(content, aliases);
 
-    if (sortedContent !== content) {
+    if (!writeToFile) {
+      // eslint-disable-next-line no-console
+      console.log(sortedContent);
+    } else if (sortedContent !== content) {
       fs.writeFile(filePath, sortedContent, (writeError) => {
         if (writeError) {
           throw writeError;

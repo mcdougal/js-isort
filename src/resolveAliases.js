@@ -42,6 +42,7 @@ const loadCache = () => {
 
 const setCachedAliases = (cache, configAbsPath, aliases) => {
   const configMTime = fs.statSync(configAbsPath).mtime;
+  // eslint-disable-next-line prefer-object-spread
   const newCache = Object.assign({}, cache);
 
   newCache[configAbsPath] = {

@@ -411,6 +411,7 @@ const parseContent = (content) => {
     allowAwaitOutsideFunction: true,
     allowImportExportEverywhere: true,
     allowReturnOutsideFunction: true,
+    errorRecovery: true,
     plugins: [
       `classProperties`,
       `dynamicImport`,

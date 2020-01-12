@@ -500,10 +500,10 @@ import {
   `.trim();
 
   const result = `
-import { foo1, // this is comment for foo1
-foo2, // this is comment for foo2
-foo3 } from // this is comment for foo3
-'foo';
+import { foo1 // this is comment for foo1
+, foo2 // this is comment for foo2
+, foo3 // this is comment for foo3
+} from 'foo';
   `.trim();
 
   expect(isort(content)).toEqual(result);
@@ -1141,11 +1141,11 @@ import { h, i, z } from 'd';
 import { j as kkkkkk, k as lllll, l as jjjjjjj } from 'e';
 import { m, n, o } from "f";
 /*thisisfs*/
-import { aaa,
+import { aaa, bbb, ccc
 /*
 \\/* *\\/
 */
-bbb, ccc, ddd, ttt, uuu, vvv, www, xxx, yyy, zzzz } from "h";
+, ddd, ttt, uuu, vvv, www, xxx, yyy, zzzz } from "h";
 import { q, r, s } from 'p';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -1163,8 +1163,8 @@ import AuthenticatedRoute from 'components/AuthenticatedRoute';
 //    import ErrorBoundary from  'components/ErrorBoundary' ;
 import Login from 'components/Login';
 // Test comment test comment     test comment test comment
-import { // testing
-authMiddleware, loggingMiddleware, setUserToken as tokenUserSet } from 'utils/auth';
+import { authMiddleware, loggingMiddleware // testing
+, setUserToken as tokenUserSet } from 'utils/auth';
 import { itest1, itest2, itest3, itest4, itest5, itest6, itest7, itest8, itest9, itest10, itest11, itest12 } from 'utils/itest';
 // Test comment test comment test comment test comment  //////
 /////// Test comment test comment test comment test comment

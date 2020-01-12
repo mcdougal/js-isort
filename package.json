@@ -17,22 +17,23 @@
   "main": "src/js-isort.js",
   "bin": "src/js-isort-cli.js",
   "scripts": {
+    "check": "npx npm-check --skip-unused",
     "lint": "eslint src/ tests/",
     "test": "jest",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "devDependencies": {
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "jest": "^24.8.0",
-    "prettier": "^1.18.2"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1"
   },
   "dependencies": {
-    "@babel/generator": "^7.5.0",
-    "@babel/parser": "^7.5.0",
-    "commander": "^2.20.0"
+    "@babel/generator": "^7.8.0",
+    "@babel/parser": "^7.8.0",
+    "commander": "^4.1.0"
   }
 }

@@ -419,6 +419,7 @@ const parseContent = (content) => {
       `exportNamespaceFrom`,
       `objectRestSpread`,
       `jsx`,
+      `typescript`,
     ],
     ranges: true,
     sourceType: `module`,

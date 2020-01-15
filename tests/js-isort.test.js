@@ -1199,3 +1199,23 @@ const makeSureJSXDoesntBreak = (
 
   expect(isort(content, aliases)).toEqual(result);
 });
+
+it(`supports typescript`, () => {
+  const content = `
+import { QueryHookOptions, MutationHookOptions } from '@apollo/react-hooks';
+
+function greeter(person: string) {
+  return "Hello, " + person;
+}
+`.trim();
+
+  const result = `
+import { MutationHookOptions, QueryHookOptions } from '@apollo/react-hooks';
+
+function greeter(person: string) {
+  return "Hello, " + person;
+}
+`.trim();
+
+  expect(isort(content)).toEqual(result);
+});

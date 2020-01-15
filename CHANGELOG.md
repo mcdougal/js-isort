@@ -1,3 +1,7 @@
+# 3.1.0 / 2020-01-15
+
+- Support sorting of TypeScript files
+
 # 3.0.0 / 2020-01-12
 
 BREAKING CHANGES:

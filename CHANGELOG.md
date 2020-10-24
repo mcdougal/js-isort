@@ -1,3 +1,7 @@
+# 3.1.1 / 2020-10-24
+
+- Fix bug where namespace imports were merged with non-namepsace imports, causing the output to have a syntax error
+
 # 3.1.0 / 2020-01-15
 
 - Support sorting of TypeScript files

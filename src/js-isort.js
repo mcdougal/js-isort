@@ -46,6 +46,15 @@ const trimEnd = (s) => {
   return s.replace(/\s+$/, ``);
 };
 
+const isNamespaceImportNode = (node) => {
+  return (
+    node.specifiers &&
+    node.specifiers.some((specifier) => {
+      return specifier.type === `ImportNamespaceSpecifier`;
+    })
+  );
+};
+
 /**
  * Return the group for the given module:
  *
@@ -252,6 +261,18 @@ const sortModules = (nodeA, nodeB, aliases, collator) => {
     return abcCompare;
   }
 
+  if (nodeA.specifiers && nodeB.specifiers) {
+    const isNamespaceImportA = isNamespaceImportNode(nodeA);
+    const isNamespaceImportB = isNamespaceImportNode(nodeB);
+
+    if (isNamespaceImportA && !isNamespaceImportB) {
+      return -1;
+    }
+    if (!isNamespaceImportA && isNamespaceImportB) {
+      return 1;
+    }
+  }
+
   if (!nodeA.specifiers && nodeB.specifiers) {
     return -1;
   }
@@ -264,19 +285,24 @@ const sortModules = (nodeA, nodeB, aliases, collator) => {
  */
 const collapseModules = (importNodes) => {
   const collapsedNodes = [];
-  const visited = {};
+  const importNodesByModule = {};
+  const namespaceImportNodesByModule = {};
 
   importNodes.forEach((node) => {
     const specifiers = node.specifiers;
 
     if (specifiers) {
+      const targetMapping = isNamespaceImportNode(node)
+        ? namespaceImportNodesByModule
+        : importNodesByModule;
+
       const module = node.source.value;
 
-      if (!visited[module]) {
+      if (!targetMapping[module]) {
         collapsedNodes.push(node);
-        visited[module] = node;
+        targetMapping[module] = node;
       } else {
-        const baseNode = visited[module];
+        const baseNode = targetMapping[module];
         const baseSpecifiers = baseNode.specifiers;
 
         specifiers.forEach((specifier) => {

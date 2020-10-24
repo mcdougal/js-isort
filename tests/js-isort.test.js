@@ -114,6 +114,24 @@ import a from 'foo';
 //  Import variations
 // =============================================================================
 
+it(`keeps namespace import on a separate line`, () => {
+  const content = `
+import foo from "bar";
+import * as baz from "bar";
+
+console.log('foo');
+  `.trim();
+
+  const result = `
+import * as baz from "bar";
+import foo from "bar";
+
+console.log('foo');
+  `.trim();
+
+  expect(isort(content)).toEqual(result);
+});
+
 it(`works on all import styles`, () => {
   const content = `
 import test1 from "zar";
@@ -123,7 +141,8 @@ import { test4 as alias } from "qar";
 import { test5, test6 } from "par";
 import { test7, test8 as alias2 } from "dar";
 import test9, { test10, test11, test12 } from "car";
-import test13, * as test15 from "bar";
+import test13 from "bar";
+import * as test15 from "bar";
 import "aar";
 
 console.log('foo');
@@ -131,7 +150,8 @@ console.log('foo');
 
   const result = `
 import "aar";
-import test13, * as test15 from "bar";
+import * as test15 from "bar";
+import test13 from "bar";
 import test9, { test10, test11, test12 } from "car";
 import { test7, test8 as alias2 } from "dar";
 import { test5, test6 } from "par";
@@ -155,7 +175,8 @@ import { test4 as alias } from 'qar';
 import { test5, test6 } from 'par';
 import { test7, test8 as alias2 } from 'dar';
 import test9, { test10, test11, test12 } from 'car';
-import test13, * as test15 from 'bar';
+import test13 from 'bar';
+import * as test15 from 'bar';
 import 'aar';
 
 console.log('foo');
@@ -164,7 +185,8 @@ console.log('foo');
   const result = `
 import 'aar';
 
-import test13, * as test15 from 'bar';
+import * as test15 from 'bar';
+import test13 from 'bar';
 import test9, { test10, test11, test12 } from 'car';
 import { test7, test8 as alias2 } from 'dar';
 import { test5, test6 } from 'par';
@@ -796,6 +818,22 @@ import Apollo from 'react-apollo';
 
   const result = `
 import Apollo, ReactApollo, { Mutation } from 'react-apollo';
+`.trim();
+
+  expect(isort(content)).toEqual(result);
+});
+
+it(`handles duplicated namespace imports`, () => {
+  const content = `
+import * as foo from 'bar';
+import * as foo from 'bar';
+import { baz } from 'bar';
+import bop from 'bar';
+  `.trim();
+
+  const result = `
+import * as foo from 'bar';
+import bop, { baz } from 'bar';
 `.trim();
 
   expect(isort(content)).toEqual(result);

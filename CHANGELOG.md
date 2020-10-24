@@ -1,3 +1,7 @@
+# 3.2.0 / 2020-10-24
+
+- Add `--ignore` flag for ignoring files
+
 # 3.1.1 / 2020-10-24
 
 - Fix bug where namespace imports were merged with non-namepsace imports, causing the output to have a syntax error

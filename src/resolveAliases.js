@@ -103,6 +103,18 @@ const parseBabelAliases = (config) => {
   return Object.keys(moduleResolverOptions.alias);
 };
 
+const parseTypeScriptAliases = (config) => {
+  if (!config.compilerOptions || !config.compilerOptions.paths) {
+    return null;
+  }
+
+  const aliases = Object.keys(config.compilerOptions.paths).map((key) => {
+    return key.split(`/`)[0];
+  });
+
+  return aliases;
+};
+
 const resolveAliases = (configPath) => {
   let aliases = [];
 
@@ -117,7 +129,11 @@ const resolveAliases = (configPath) => {
       /* eslint-disable global-require, import/no-dynamic-require */
       const config = require(configAbsPath);
 
-      aliases = parseWebpackAliases(config) || parseBabelAliases(config) || [];
+      aliases =
+        parseTypeScriptAliases(config) ||
+        parseWebpackAliases(config) ||
+        parseBabelAliases(config) ||
+        [];
 
       setCachedAliases(cache, configPath, aliases);
     }

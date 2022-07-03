@@ -1,10 +1,14 @@
+# 3.3.0 / 2022-06-03
+
+- Support TypeScript config files for resolving import aliases
+
 # 3.2.0 / 2020-10-24
 
 - Add `--ignore` flag for ignoring files
 
 # 3.1.1 / 2020-10-24
 
-- Fix bug where namespace imports were merged with non-namepsace imports, causing the output to have a syntax error
+- Fix bug where namespace imports were merged with non-namespace imports, causing the output to have a syntax error
 
 # 3.1.0 / 2020-01-15
 

@@ -1,3 +1,7 @@
+# 3.3.1 / 2022-07-30
+
+- Add `node:url` to Node built-ins array
+
 # 3.3.0 / 2022-06-03
 
 - Support TypeScript config files for resolving import aliases

@@ -21,6 +21,7 @@ const NODE_BUILTINS = [
   `http`,
   `https`,
   `net`,
+  `node:url`,
   `os`,
   `path`,
   `punycode`,

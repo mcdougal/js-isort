@@ -1,6 +1,6 @@
 {
   "name": "js-isort",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Group and sort JS imports.",
   "keywords": [
     "js",

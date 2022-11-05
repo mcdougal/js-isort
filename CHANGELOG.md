@@ -1,4 +1,4 @@
-# 3.4.1 / 2022-11-04
+# 3.4.0 / 2022-11-04
 
 - Treat tsconfig paths that leave the root directory as external imports
 - Fix bug where tsconfig paths with forward slashes were not getting parsed correctly

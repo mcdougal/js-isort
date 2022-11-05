@@ -72,7 +72,11 @@ it(`returns nothing when TypeScript config does not define aliases`, () => {
 
 it(`works when TypeScript config defines aliases`, () => {
   const configPath = path.resolve(__dirname, `ts.config.with.alias.json`);
-  expect(resolveAliases(configPath)).toEqual([`@components`, `@utils`]);
+  expect(resolveAliases(configPath)).toEqual([
+    `@components`,
+    `@utils`,
+    { alias: `@external/foo`, isExternal: true },
+  ]);
 });
 
 it(`works when loading TypeScript aliases from the cache`, () => {
@@ -81,5 +85,9 @@ it(`works when loading TypeScript aliases from the cache`, () => {
   // Populate cache
   resolveAliases(configPath);
 
-  expect(resolveAliases(configPath)).toEqual([`@components`, `@utils`]);
+  expect(resolveAliases(configPath)).toEqual([
+    `@components`,
+    `@utils`,
+    { alias: `@external/foo`, isExternal: true },
+  ]);
 });

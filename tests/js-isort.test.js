@@ -686,6 +686,30 @@ import Button from 'components/Button';
   expect(isort(content, aliases)).toEqual(result);
 });
 
+it(`supports external aliases for monorepos`, () => {
+  const aliases = [
+    `actions`,
+    { alias: `@lib/utils`, isExternal: true },
+    `styles`,
+  ];
+
+  const content = `
+import utilityFunc from '@lib/utils';
+import actions from 'actions';
+import 'styles';
+  `.trim();
+
+  const result = `
+import 'styles';
+
+import utilityFunc from '@lib/utils';
+
+import actions from 'actions';
+  `.trim();
+
+  expect(isort(content, aliases)).toEqual(result);
+});
+
 it(`does not match alias if other module starts with same name`, () => {
   const aliases = [`components`, `styles`];
 

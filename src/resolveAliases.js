@@ -108,9 +108,17 @@ const parseTypeScriptAliases = (config) => {
     return null;
   }
 
-  const aliases = Object.keys(config.compilerOptions.paths).map((key) => {
-    return key.split(`/`)[0];
-  });
+  const aliases = Object.entries(config.compilerOptions.paths).map(
+    ([key, paths]) => {
+      const alias = key.replace(/\/\*$/, ``);
+
+      const hasExternalPath = paths.some((p) => {
+        return p.startsWith(`..`);
+      });
+
+      return hasExternalPath ? { alias, isExternal: true } : alias;
+    }
+  );
 
   return aliases;
 };

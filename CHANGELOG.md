@@ -1,3 +1,8 @@
+# 3.4.1 / 2022-11-04
+
+- Treat tsconfig paths that leave the root directory as external imports
+- Fix bug where tsconfig paths with forward slashes were not getting parsed correctly
+
 # 3.3.1 / 2022-07-30
 
 - Add `node:url` to Node built-ins array
